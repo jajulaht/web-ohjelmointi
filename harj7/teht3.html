@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <style type="text/css">
+  #main {
+    width: 400px;
+    height: 400px;
+  }
+  </style>
+  <title>Tehtävä 3</title>
+</head>
+<body onload="drawchart()">
+  <div id="main">
+  <button type="button" id="ford" onclick="addcar(0)">Ford</button>
+  <button type="button" id="opel" onclick="addcar(1)">Opel</button>
+  <button type="button" id="toyota" onclick="addcar(2)">Toyota</button>
+  <button type="button" id="reset" onclick="nollaa()">Nollaa</button>
+  <h1>Autolaskuri</h1>
+  <canvas id="myChart" width="400" height="400"></canvas>
+</div>
+  <!-- Scripts-->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+  <script type="text/javascript">
+  var carCount = [0, 0, 0]; // Autojen lukummäärät
+    function drawchart() {
+    var ctx = document.getElementById('myChart');
+    var ctx = document.getElementById('myChart').getContext('2d');
+    var myChart = new Chart(ctx, {
+      type: 'bar',
+      data: {
+          labels: ['Ford', 'Opel', 'Toyota'],
+          datasets: [{
+              label: 'Lukumäärä (kpl)',
+              data: [carCount[0], carCount[1], carCount[2]],
+              backgroundColor: [
+                  'rgba(54, 162, 235, 0.2)',
+                  'rgba(75, 192, 192, 0.2)',
+                  'rgba(153, 102, 255, 0.2)'
+              ],
+              borderColor: [
+                  'rgba(54, 162, 235, 1)',
+                  'rgba(75, 192, 192, 1)',
+                  'rgba(153, 102, 255, 1)'
+              ],
+              borderWidth: 1
+          }]
+      },
+      options: {
+          scales: {
+              yAxes: [{
+                  ticks: {
+                      beginAtZero: true
+                  }
+              }]
+          }
+      }
+  });
+}
+// Lisää autoja
+function addcar(carnumber) {
+  carCount[carnumber]++;
+  drawchart();
+}
+// Nollaa autojen määrät
+function nollaa() {
+  for(var i = 0; i < carCount.length; i++) {
+    carCount[i] = 0;
+  }
+  drawchart();
+}
+  </script>
+</body>
+</html>

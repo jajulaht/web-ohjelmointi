@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Tehtävä 4</title>
+  <style>
+  body {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 1.3rem;
+  }
+  table {
+    border: 1px solid black;
+    border-spacing: 5px;
+    padding: 10px;
+  }
+  td, th {
+    border: 1px solid black;
+    padding: 5px;
+    width: 2rem;
+  }
+  th {
+    background-color: deepskyblue;
+  }
+  input {
+    width: 2rem;
+    font-size: 1.3rem;
+  }
+  </style>
+</head>
+<body>
+<table>
+  <tr>
+    <th>T1</th>
+    <th>T2</th>
+    <th>T3</th>
+    <th>T4</th>
+  </tr>
+  <tr>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+  </tr>
+</table>
+<p>Pistemäärä (summa): <span id="sum"></span> <br>
+  Arvosana: <span id="grade"></span>
+</p>
+<script>
+  // Input-kentät ja tapahtumankuuntelijat
+  let tds = document.querySelectorAll("td");
+  for(let td of tds) {
+    let inputNode = document.createElement("input");
+    inputNode.setAttribute("type", "text");
+    inputNode.setAttribute("value", 0);
+    inputNode.addEventListener("blur", calcAll);
+    td.appendChild(inputNode);
+  }
+  // Metodi laskemisia varten
+  function calcAll() {
+    let inputs = document.querySelectorAll("input");
+    // Summa, 
+    let sum = 0;
+    for(let i of inputs) {
+      sum = sum + parseInt(i.value);
+    }
+    // Arvosana
+    let grade = 0;
+    if(sum >= 0 && sum < 13) {
+      grade = 0;
+    }
+    else if(sum >= 13 && sum < 16) {
+      grade = 1;
+    }
+    else if(sum >= 16 && sum < 18) {
+      grade = 2;
+    }
+    else if(sum >= 18 && sum < 20) {
+      grade = 3;
+    }
+    else if(sum >= 20 && sum < 22) {
+      grade = 4;
+    }
+    else {
+      grade = 5;
+    }
+    // Sijoittamiset
+    document.getElementById("sum").innerHTML = sum;
+    document.getElementById("grade").innerHTML = grade;
+    // Tarkistus
+    for(let i of inputs) {
+      let compare = parseInt(i.value);
+      if(compare < 0 || compare > 6 || !Number.isInteger(compare)) {
+        document.getElementById("sum").innerHTML = "VIRHE!";
+        document.getElementById("grade").innerHTML = "VIRHE!";
+      }   
+    }
+  }
+</script>
+</body>
+</html>

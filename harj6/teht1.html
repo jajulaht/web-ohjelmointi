@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <style type="text/css">
+    body {
+      background-color: lightgray;
+      text-align: center;
+    }
+    canvas {
+      background-color: #ffffff;
+    }
+  </style>
+  <script type="text/javascript">
+      function draw() {
+        var c = document.getElementById('c');
+        if (c.getContext) {
+          var ctx = c.getContext("2d");
+          ctx.font = "30px serif";
+          ctx.fillText("Canvas-harjoitus", 20, 40); 
+
+          // SWE-lipun pohja
+          ctx.fillStyle = "#0000FF";
+          ctx.fillRect(20, 60, 560, 340);
+          // SWE-lipun risti
+          ctx.fillStyle = "#FFFF00";
+          ctx.beginPath();
+          ctx.moveTo(180, 60);
+          ctx.lineTo(250, 60);
+          ctx.lineTo(250, 200);
+          ctx.lineTo(580, 200);
+          ctx.lineTo(580, 265);
+          ctx.lineTo(250, 265);
+          ctx.lineTo(250, 400);
+          ctx.lineTo(180, 400);
+          ctx.lineTo(180, 265);
+          ctx.lineTo(20, 265);
+          ctx.lineTo(20, 200);
+          ctx.lineTo(180, 200);
+          ctx.closePath();
+          ctx.fill();
+
+          // GY-lipun pohja
+          ctx.fillStyle = "#009E49";
+          ctx.fillRect(20, 440, 560, 340);
+          // lipun puhtaaksi leikkaaminen
+          ctx.rect(20, 440, 560, 340);
+          ctx.clip();
+          // GY-lipun alempi kolmio
+          ctx.fillStyle = "#FCD116";
+          ctx.strokeStyle = "#ffffff";
+          ctx.lineWidth = 8;
+          ctx.beginPath();
+          ctx.moveTo(16, 444);
+          ctx.lineTo(568, 610);
+          ctx.lineTo(16, 776);
+          ctx.closePath();
+          ctx.fill();
+          ctx.stroke();
+          // GY-lipun ylempi kolmio
+          ctx.fillStyle = "#CE1126";
+          ctx.strokeStyle = "#000000";
+          ctx.lineWidth = 8;
+          ctx.beginPath();
+          ctx.moveTo(16, 444);
+          ctx.lineTo(300, 610);
+          ctx.lineTo(16, 776);
+          ctx.closePath();
+          ctx.fill();
+          ctx.stroke();
+        }
+      }
+  </script>
+  <title>Tehtävä 1</title>
+</head>
+<body onload="draw();">
+  <canvas id="c" width="600" height="810"></canvas>
+</body>
+</html>

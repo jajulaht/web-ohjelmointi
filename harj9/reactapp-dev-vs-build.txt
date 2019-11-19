@@ -1,0 +1,8 @@
+Kehitysympäristö:
+- tiedostojen yhteiskoko lähes 122 Mb
+- 32 750 tiedostoa
+- suurin osa Noden moduleja
+
+Tuotantoversio:
+- tiedostojen yhteiskoko 563 kb
+- 21 tiedostoa

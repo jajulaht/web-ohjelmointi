@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+  <head>
+        <script src="https://unpkg.com/react@15.3.2/dist/react.js"></script>
+        <script src="https://unpkg.com/react-dom@15.3.2/dist/react-dom.js"></script>
+        <script src="https://unpkg.com/babel-core@5.8.38/browser.min.js"></script>
+
+    <style>
+	 body {width: 400px; margin: auto}
+	.box {
+	  border: 1px dashed #000; padding: 15px; background-color: #adbed8;
+	}
+	input[type="text"] {width: 200px;}
+
+	button {
+	  background-color: #069; border-radius: 5px;
+	  color: #fff; margin-bottom: 5px; margin-right: 5px;
+	  padding: 5px 15px; border: none;
+	}
+    </style>
+  </head>
+
+  <body>
+ 
+  <h3>Autolaskuri</h3>
+  <p>Klikkaa mieleistä auton kuvaa</p>
+
+  <div id="ratkaisu" class="box"></div>
+
+    <script type="text/babel">
+    let autot=[0,0];
+
+    class Autolaskuri extends React.Component {
+      constructor(props) {
+          super(props);
+          this.state={stateautot:autot};
+          this.handleClick = this.handleClick.bind(this);
+      }
+      
+      handleClick(index){
+          let autotlkm=this.state.stateautot;
+          autotlkm[index]++;
+          this.setState({autotlkm});
+      }
+
+      render() {
+          return (
+            <div>
+              <div>
+                <p>Escorts: {this.state.stateautot[0]}</p>
+                <img src="images/escort.png" width="200" onClick={this.handleClick.bind(this, 0)} />
+              </div>
+              <div>
+                <p>Passats: {this.state.stateautot[1]}</p>
+                <img src="images/passat.png" width="200" onClick={this.handleClick.bind(this, 1)} />
+              </div>
+            </div>
+          );
+        }
+      }
+
+      ReactDOM.render(
+        <Autolaskuri />,
+        document.getElementById('ratkaisu')
+      );
+
+    </script>
+
+  </body>
+</html>
+

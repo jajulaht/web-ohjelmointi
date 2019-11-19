@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+  <head>
+        <script src="https://unpkg.com/react@15.3.2/dist/react.js"></script>
+        <script src="https://unpkg.com/react-dom@15.3.2/dist/react-dom.js"></script>
+        <script src="https://unpkg.com/babel-core@5.8.38/browser.min.js"></script>
+        <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+  </head>
+
+  <body>
+    <h3>Highscores</h3>
+    <div id="root"></div>
+
+    <script type="text/babel">
+
+      class Highscores extends React.Component {
+        constructor(props) {
+          super(props);
+          this.state = {highscores: [], loaded: false};
+          this.onLoadClick = this.onLoadClick.bind(this);
+          this.getHighScores = this.getHighScores.bind(this);
+          // Mahdollisesti muuta toiminnallisuutta
+        }
+
+        getHighScores () {
+          // this.setState({ highscores: highscoreData, loaded:true });
+          $.ajax({
+            url: 'highscoreData.json',
+            cache: false,
+            dataType: 'json'
+          }).done((data) => {
+              this.setState({scores: data.scores, loaded:true});
+          }).fail((jqXHR, textStatus, errorThrown) => {
+              console.log(textStatus+":"+errorThrown);
+          });
+        }
+
+        componentDidMount(){
+          this.getHighScores();
+        }
+        
+        onLoadClick(){
+          this.setState({highscores:[],loaded:false});
+          this.getHighScores();
+        }
+     
+        render() {
+          if(!this.state.loaded){
+            return(<div>Loading...</div>);
+          }
+          return (
+            <div>
+                <ul>
+                {
+                    this.state.scores.map((score, index) =>
+                            <li key={index}>{score.name}: {score.score}</li>
+                    )
+                }
+                </ul>
+                <p><button onClick={this.onLoadClick}>Load again</button></p>
+            </div>
+          )
+        }
+      }
+
+      ReactDOM.render(
+        <Highscores />,
+        document.getElementById('root')
+      );
+
+    </script>
+
+  </body>
+</html>
+

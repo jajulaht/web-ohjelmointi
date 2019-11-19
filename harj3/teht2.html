@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <style>
+    body {
+      text-align: center;
+    }
+    ul {
+      list-style: none;
+    }
+    li {
+      text-transform: uppercase;
+      display: inline;
+    }
+    li:not(:last-child)::after {
+      content: "|";
+      margin: 0 .5rem;
+    }
+  </style>
+  <title>Tehtävä 2</title>
+</head>
+<body>
+  <ul>
+      <li><a href="#" onclick="swapImg('images/kuva1.png')">kuva1</a></li>
+      <li><a href="#" onclick="swapImg('images/kuva2.png')">kuva2</a></li>
+      <li><a href="#" onclick="swapImg('images/kuva3.png')">kuva3</a></li>
+  </ul>
+  <div>
+    <img id="img" src="images/kuva1.png">
+  </div>
+  <script>
+    function swapImg(src) {
+      let img = document.getElementById("img").src = src;
+    }
+  </script>
+</body>
+</html>

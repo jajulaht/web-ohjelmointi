@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>Tehtävä 1</title>
+</head>
+<body>
+  <h1>SimpleToDo</h1>
+  <form id="f">
+    <label>ToDo:</label><br>
+    <input type=text id="task"><br><br>
+    <button type="button" onclick="addTask(f.task.value)">Lisää</button>
+    <button type="button" onclick="delTasks()">Tyhjää lista</button>
+  </form>
+  <ul id="list"></ul>
+  <script>
+    function addTask(task) {
+      if(!task == "") { // Ei lisätä tyhjää riviä, puuttui teht1
+        let list = document.getElementById("list");
+        let linode = document.createElement('li');
+        let litext = document.createTextNode(task);
+        linode.appendChild(litext);
+        linode.addEventListener("click", function() {
+            removeTask(this);
+        });
+        list.appendChild(linode);
+      }
+      document.getElementById("task").value = ""; // kentän tyhjentäminen
+    }
+    function delTasks() {
+      var list = document.getElementById("list");
+        while(list.hasChildNodes()) {
+          list.removeChild(list.firstChild);
+      }
+    }
+    function removeTask(node) {
+      node.remove();
+    }
+  </script>
+</body>
+</html>

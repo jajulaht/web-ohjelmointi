@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="../build/react.js"></script>
+    <script src="../build/react-dom.js"></script>
+    <script src="../build/browser.min.js"></script>
+  </head>
+  <body>
+    <div id="example"></div>
+    <script type="text/babel">
+var MyComponent = React.createClass({
+  handleClick: function() {
+    this.refs.n3.value = parseInt(this.refs.n1.value) + parseInt(this.refs.n2.value);
+  },
+  render: function() {
+    return (
+      <div>
+        Luku1: <input type="text" ref="n1" onChange={this.handleClick}/>
+        Luku2: <input type="text" ref="n2" onChange={this.handleClick} /><br />
+        Tulos: <input type="text" ref="n3" />
+      </div>
+    );
+  }
+});
+
+ReactDOM.render(
+  <MyComponent />,
+  document.getElementById('example')
+);
+    </script>
+  </body>
+</html>

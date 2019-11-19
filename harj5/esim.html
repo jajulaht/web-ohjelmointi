@@ -1,0 +1,76 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>jQuery</title>
+</head>
+<body>    
+    <form id="myForm">
+        <table>
+            <tbody>
+                <tr><td>Firstname:</td><td><input type="text" id="firstname"/></td></tr>
+                <tr><td>Lastname:</td><td><input type="text"/></td></tr>
+                <tr>
+                    <td>Car:</td>
+                    <td>
+                        <input type="radio" name="auto" value="yes" checked>Yes
+                        <input type="radio" name="auto" value="no">No
+                    </td>
+                </tr>
+                <tr>
+                    <td>Country:</td>
+                    <td>
+                       <select id="country">
+                            <option value="finland">Finland</option>
+                            <option value="sweden">Sweden</option>
+                            <option value="norway">Norway</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr><td></td><td><input type="submit" value="send"></td></tr>
+            </tbody>
+        </table>
+    </form>
+    
+
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+    <!-- own code -->
+    <script type="text/javascript">
+        // document ready
+        $(document).ready(function(){
+            // highlite input-element background when it has focus
+            $("input[type=text]").focus(function(){
+                $(this).css("background-color","#d6ffc9");
+            });
+            // set color back when not active anymore
+            $("input[type=text]").blur(function(){
+                $(this).css("background-color","#fff");
+            });
+            // listen changes, called when loses focus
+            $("#firstname").change(function(){
+                console.log($(this).val());    
+            });
+            // better use keyup -> called every time when key is back to up
+            $("#firstname").keyup(function(){
+                console.log($(this).val());    
+            });
+            // radio-button changes
+            $("input[type=radio]").change(function(){
+                console.log($(this).val());    
+            });
+            // country changes
+            $("#country").change(function() {
+                console.log($(this).val()); 
+            });
+            // handle submit event
+            $("#myForm").submit(function(event){
+                console.log("Submit happend");
+                // remove default submit action -> don't send data to server
+                event.preventDefault();
+            });
+        });
+    </script>
+</body>
+
+</html>

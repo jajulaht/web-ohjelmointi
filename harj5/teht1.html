@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <style>
+    fieldset {
+      border: 0;
+    }
+  </style>
+  <title>Tehtävä 1</title>
+</head>
+<body>
+  <h1>Lukujen summa</h1>
+  <form id="f">
+    <fieldset>
+      <label>Luku 1:</label>
+      <input type="text" id="n1">
+    </fieldset>
+    <fieldset>
+        <label>Luku 2:</label>
+        <input type="text" id="n2">
+    </fieldset>
+    <button type="button">Summa</button>
+  </form>
+  <p>Lukujen summa on <span id="sum"></span></p>
+
+  <!-- jQuery -->
+  <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+  <!-- own code -->
+  <script type="text/javascript">
+    // document ready
+    $(document).ready(function(){
+      $("button").click(function(){
+        let n1 = parseInt($("#n1").val(),10);
+        let n2 = parseInt($("#n2").val(),10);
+        let sum = n1 + n2;
+        $("#sum").text(sum);
+        });
+    });
+  </script>
+</body>
+</html>

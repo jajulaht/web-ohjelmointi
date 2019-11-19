@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <style type="text/css">
+    body {
+      text-align: center;
+    }
+    canvas, #main {
+      background-color: #ffffff;
+    }
+    #main {
+      width: 800px;
+      margin: 0 auto;
+    }
+    #sliderDiv {
+      padding-top: 1rem;
+      min-height: 4rem;
+    }
+    input {
+      margin: 0;
+      width: 100%;
+    }
+    .slidecontainer {
+    width: 6rem; /* Width of the outside container */
+    margin: auto;
+    padding-bottom: 2rem;
+    }
+    #c {
+      border: 1px solid black;
+    }
+  </style>
+  <title>Tehtävä 4</title>
+</head>
+<body onload="draw();">
+  <div id="main">
+    <div id="sliderDiv">
+      <p>Säädä nestepinnan korkeus</p>
+      <div class="slidecontainer">
+        <p><span id="valueNow"></span> cm</p>
+        <input type="range" min="0" max="200" value="100" id="myRange">
+      </div>
+    </div>
+    <canvas id="c" width="800" height="400"></canvas>
+  </div>
+  <!-- Scripts-->
+  <script type="text/javascript">
+
+    
+    // Canvas drawing
+    function draw() {
+      // Circle
+      var x = 400;
+      var y = 200;
+      var radius = 150;
+      var slider = document.getElementById("myRange");
+      var output = document.getElementById("valueNow");
+      output.innerHTML = slider.value; // Display the default slider value
+      var surface = slider.value;
+
+      // Multipliers for starting & ending points for the circle segment
+      var startMP = 0.5 + (slider.value/201); // 0.5-1.5 (Exactly 1.5 --> no circle!!!)
+      var endMP = 2.5 - (slider.value/201); // 1.5-2.5 (2.5 --> 1.5)
+      
+      // Update the current slider value (each time you drag the slider handle)
+      slider.oninput = function() {
+        output.innerHTML = this.value;
+        startMP = 0.5 + (this.value/200);
+        endMP = 2.5 - (this.value/200);
+        clear();
+        draw();
+        surface = this.value;
+      }
+      // Canvas
+      var c = document.getElementById('c');
+      var startAngle = startMP * Math.PI; // 0.5-1.5
+      var endAngle = endMP * Math.PI; // 1.5-2.5 (2.5 --> 1.5)
+      var counterClockwise = true;
+      if (c.getContext) {
+        var ctx = c.getContext("2d");
+        // text
+        ctx.fillStyle="#000000";
+        ctx.font="16px sans-serif";
+        ctx.fillText("Tynnyrin pituus: 100 cm",16,25);
+        ctx.fillText("Tynnyrin halkaisija: 200 cm",16,45);
+        ctx.fillText("Tynnyrin tilavuus: 3141.59 litraa",16,65);
+        ctx.fillText("Nestemäärä: ",16,105);
+        ctx.fillText(volume(surface) +  " litraa",16,125);
+        // circle
+        ctx.beginPath();
+        // x, y, r, start, stop
+        ctx.arc(400,200,150,0,2*Math.PI);
+        ctx.stroke();
+        // Segment
+        ctx.beginPath();
+        ctx.fillStyle = "lightblue";
+        // x, y, r, start, stop, direction
+        ctx.arc(x, y, radius, startAngle, endAngle, counterClockwise);
+        ctx.closePath();
+        ctx.fill();
+        ctx.stroke();
+      }
+    }
+    function clear() {
+      var c = document.getElementById('c');
+      const context = c.getContext('2d');
+      context.clearRect(0, 0, c.width, c.height);
+    } 
+    // Calculate area
+    function volume(surface) {
+      let s = surface;
+      let r = 200;
+      let h = r - s;
+      let angle = Math.acos(h/r);
+      let sector = ((2 * angle) / 360) * Math.PI * r * r;
+      let base = h * Math.tan(angle);
+      //console.log(base);
+      let triangle = (base * h); // Both sides
+      let area = sector - triangle;
+      return area;
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>Tehtävä 1</title>
+</head>
+<body>
+  <h1>Laske luvut yhteen</h1>
+<form id="f">
+     <input type=text id="n1"><br>
+     <input type=text id="n2"><br>
+     <button type="button" onclick="tulostaSumma(f.n1.value, f.n2.value)">Laske</button>
+  </form>
+  <div id="results"></div>
+  <script>
+    function tulostaSumma(str1,str2) {
+      var a = parseInt(str1);
+      var b = parseInt(str2);
+      var summa = a + b;
+      document.getElementById("results").innerHTML = "<p>summa=" + summa + "</p>";
+    }
+  </script>
+</body>
+</html>

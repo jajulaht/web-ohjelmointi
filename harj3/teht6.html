@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <style>
+    body, input, select, button {
+      font-size: 1.3rem;
+    }
+    #mainArea {
+      background-color: #acbcd6;
+      width: 30rem;
+      padding: 1rem;
+    }    
+    fieldset {
+      border: 0;
+    }
+    input {
+      width: 20rem;
+    }
+    button {
+      padding: 0.5rem 1.5rem;
+      background-color: #0f6596;
+      color: #ffffff;
+    }
+    #resultArea {
+      background-color: #feff3b;
+      margin: 1rem;
+      padding: 2rem;
+    }
+  </style>
+  <title>Tehtävä 6</title>
+</head>
+<body>
+  <div id="mainArea">
+    <fieldset>
+      <label>Valitse juhlaväri:</label><br>
+      <select id="sel">
+        <option value="#ebeb34">Keltainen</option>
+        <option value="#ff94d8">Pinkki</option>
+        <option value="#94ddff">Sininen</option>
+      </select>
+    </fieldset>
+    <fieldset>
+      <label>Mikä juhla?</label><br>
+      <input type="text" id="txt">
+    </fieldset>
+    <fieldset>
+      <button type="button" id="btn">Vaihda valittu taustaväri</button>
+    </fieldset>
+    <div id="resultArea">
+      <h3>Tulosalue</h3>
+      <p id="color">ffff</p>
+      <p id="party"></p>
+    </div>
+  </div>
+  <script>
+    color.innerHTML = "Valittu: " + sel.value;
+    function fnParty() {
+      party.innerHTML = txt.value;
+    }
+    function fnColor() {
+      color.innerHTML = "Valittu: " + sel.value;
+    }
+    function fnChange() {
+      resultArea.style.backgroundColor = sel.value;
+    }
+    sel.addEventListener("change", fnColor);
+    txt.addEventListener("input", fnParty);
+    btn.addEventListener("click", fnChange);
+  </script>
+</body>
+</html>

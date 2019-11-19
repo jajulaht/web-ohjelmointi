@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <style>
+    article {
+      box-sizing: border-box;
+      width: 20rem;
+      /* height: 20rem; */
+      margin: auto;
+      padding: 1.3rem;
+      background-color: #adbed8;
+    }
+    h1 {
+      text-align: center;
+      margin-top: 0;
+    }
+    p {
+      font-size: 1.2rem;
+    }
+    fieldset {
+      border: 0;
+      width: 80%;
+      margin: 0;
+      padding: 0.2rem 0 0.2rem 0;
+    }
+    fieldset input {
+      width: 5rem;
+      height: 1.5rem;
+      float:right;
+      font-size: 1.1rem;
+    }
+    label {
+      font-size: 1.2rem;
+      line-height: 2rem;
+    }
+    button {
+      width: 100%;
+      height: 2.3rem;
+      margin-top: 1rem;
+      background-color: #006699;
+      color: #ffffff;
+      font-size: 1rem;
+    }
+  </style>
+  <title>Tehtävä 2</title>
+</head>
+<body>
+  <article>
+    <h1>Vauhtilaskin</h1>
+    <form id="f">
+        <fieldset>
+          <label>Tunnit:</label>
+          <input type="text" value="0" id="h">
+        </fieldset>
+        <fieldset>
+          <label>Minuutit:</label>
+          <input type="text" value="0" id="min">
+        </fieldset>
+        <fieldset>
+          <label>Sekunnit:</label>
+          <input type="text" value="0" id="sec">
+        </fieldset>
+        <fieldset>
+          <label>Kilometrit:</label>
+          <input type="text" value="0" id="km">
+        </fieldset>
+        <button type="button" id="calc" onclick="calcAll(f.h.value, f.min.value, f.sec.value, f.km.value)">Laske vauhdit</button>
+    </form>
+    <p><span id="kmh">0 km/h</span><br><span id="minkm">0:00/km</span></p>
+  </article>
+  <script>
+    class Vauhtilaskin {
+      constructor(hours, minutes, seconds, kilometers) {
+        this.hours = hours;
+        this.minutes = minutes;
+        this.seconds = seconds;
+        this.kilometers = kilometers;
+      }
+      // Getters
+      get kmhpace() {
+        return this.calcKmhPace();
+      }
+      get minkmpace() {
+        return this.calcMinkmPace();
+      }
+      // Metodit
+      calcKmhPace() {
+        let tunnit = parseInt(this.hours)+(parseInt(this.minutes)*60+parseInt(this.seconds))/3600;
+        let kilometrit = parseInt(this.kilometers);
+        let kmh = kilometrit/tunnit;
+        return kmh.toFixed(2);
+      }
+      calcMinkmPace() {
+        let sekunnit = parseInt(this.hours)*60*60+parseInt(this.minutes)*60+parseInt(this.seconds);
+        let km = parseInt(this.kilometers);
+        let sekunnitPerKm = sekunnit/km;
+
+        let minutes = 0;
+
+        while (sekunnitPerKm >= 60){
+          minutes++;
+          sekunnitPerKm = sekunnitPerKm - 60;
+        }
+        sekunnitPerKm = Math.round(sekunnitPerKm);
+        sekunnitPerKm = String('0'+ sekunnitPerKm).slice(-2);
+        return minutes + ":" + sekunnitPerKm;
+      }
+    }
+    function calcAll(h, min, sec, km) {
+      const laskin = new Vauhtilaskin(h, min, sec, km);
+      document.getElementById("kmh").innerHTML = laskin.kmhpace + " km/h";
+      document.getElementById("minkm").innerHTML = laskin.minkmpace + "/km";
+    }
+    </script>
+</body>
+</html>

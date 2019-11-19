@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>Tehtävä 2</title>
+</head>
+<body>
+  <h1>Taulukon <span id="arr"></span> läpikäyntiä</h1>
+  <p>Tulostamista ja keskeisten suureiden laskemista anonyymeillä funktioilla</p>
+  <hr />
+  <p>Alkiot ovat:</p>
+  <div id="results"></div>
+  <script>
+    let printArray = function(arr) {
+        let tulosrivit = "";
+        for(var i = 0; i < arr.length; i++) {
+            var loppu = arr[i] + "<br>";
+            var alku = `taulukko[${i}] = `;
+            tulosrivit += (alku + loppu);
+        }
+        return tulosrivit;
+    }
+    let arrayCount = function(arr) {
+        return arr.length;
+    }
+    let arraySum = function(arr) {
+        sum = 0;
+        for(let num of arr) {
+        sum += num; 
+        }
+        return sum;
+    }
+    let arrayAvg = function(arr) {
+        return arraySum(arr)/arrayCount(arr);
+    }
+    let arrayDisplay = function(arr) {
+        return "[" + arr.join(', ') + "]";
+    }
+    function writeResults() {
+        let arr = [11,22,33,44];
+        document.getElementById("arr").innerHTML = arrayDisplay(arr);
+        document.getElementById("results").innerHTML =
+            "<p>" + printArray(arr) + "</p>" +
+            "<p>Lukumäärä on: " + arrayCount(arr) + "<br>" +
+            "Summa on: " + arraySum(arr) + "<br>" +
+            "Keskiarvo on: " + arrayAvg(arr) + "</p>";
+    }
+    window.onload = writeResults;
+  </script>
+</body>
+</html>

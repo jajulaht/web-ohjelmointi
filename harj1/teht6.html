@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="fi">
+<head>
+    <title>Tehtävä 6</title>
+    <meta charset="UTF-8">
+</head>
+<body>
+  <h2>Taulukon [11, 22, 33, 44] läpikäyntiä</h2>
+  <p>for- ja for...of-silmukoilla</p>
+  <hr>
+  <p id="tulosrivit"></p>
+  <script>
+    var taulukko = [11, 22, 33, 44];
+    var summa = 0;
+    var lkm = 0;
+    var ka = 0;
+    var tulosrivit = "";
+    for(let arvo of taulukko) {
+    summa += arvo;
+    lkm++;  
+    }
+    ka = summa / lkm;
+    for(var i = 0; i < taulukko.length; i++) {
+        var loppu = taulukko[i] + "<br>";
+        var alku = `taulukko[${i}] = `;
+        tulosrivit += (alku + loppu);
+    }
+    var keskiarvo = `Keskiarvo ${ka}`;
+    document.getElementById("tulosrivit").innerHTML = 
+    "<p>Alkiot ovat:</p><p>" + tulosrivit + "<br>" + 
+    "Lukumäärä on: " + lkm + "<br>" +
+    "Summa on: " + summa + "<br>" +
+    "Keskiarvo on: " + ka.toFixed(1) + "</p>";
+  </script>
+</body>
+</html>
